@@ -43,7 +43,7 @@ def get_json(url):
 if __name__ == "__main__":
     data = []
 
-    with open("output.json", "w") as f:
+    with open("others/output.json", "w") as f:
         for i in range(336, 2001, 48):
             output = get_json("https://platform.cloud.coveo.com/rest/search/v2?tab=All")
             output_data = json.loads(output)

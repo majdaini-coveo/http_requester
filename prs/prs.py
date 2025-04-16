@@ -1,6 +1,5 @@
 import http.client
 import json
-from bs4 import BeautifulSoup
 
 
 def http_request():
@@ -33,7 +32,7 @@ def http_request():
     data = res.read()
     all_cases = []
 
-    f = open('response.json',"a")
+    f = open('response.json', "a")
     output = data.decode("utf-8")
     response_data = json.loads(output)
     actions = response_data.get('actions', [])
@@ -46,7 +45,6 @@ def http_request():
         case_categories = []
 
         for case in cases:
-
             case_category = case.get('category', {}).get('label', '')  # Access category label
             data = case.get('description', '')
             title = case.get('title', '')
@@ -58,8 +56,8 @@ def http_request():
             case_info = {
                 "case_category": case_category,
                 "case_description": case_description,
-                "data": "<html>"+data+"</html>",
-                "documentId": "https://help.prsformusic.com/s/article/"+title.replace(" ", "-").replace("?", ""),
+                "data": "<html>" + data + "</html>",
+                "documentId": "https://help.prsformusic.com/s/article/" + title.replace(" ", "-").replace("?", ""),
                 "objecttype": object_type,
                 "title": title
             }
@@ -69,7 +67,6 @@ def http_request():
             json.dump(all_cases, f, indent=4)
 
     f.close()
-
 
 
 if __name__ == '__main__':
